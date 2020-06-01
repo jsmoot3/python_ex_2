@@ -34,9 +34,26 @@
 # As proof, please manually copy/paste the console output for one run into a file called
 # results1.txt
 
-def is_valid_email_address(s):
+#***********************************************************************************************************
+#************************************* Start of problem 1 **************************************************************
+import re
+def is_valid_email_address(instr):
     
-    # your code here
+#check if domain is either com edu org gov
+
+#check if have 3 parts <A>@<B>.<C>
+#check  A must have between 3 and 16 alpha numeric chars
+    a = re.match(r"(\w+)@(\w+).(\w+)",instr)
+    x = re.search("*.(com||edu||org||gov)$", instr)
+
+   res = re.findall(r'[\w\.-]+@[\w\.-]+(?:\.[\w]+)+', instr)
+   if len(res) != 0:
+       err = "seems legit"
+   else:
+       res = 
+        err = "Not valid email"
+
+   return (err, res)
 
     
 
@@ -44,27 +61,27 @@ def is_valid_email_address(s):
     
 
 # This if ensures that the following is NOT run if this file was imported as a module (which we'll do next!)
-if __name__ == "__main__":
+#if __name__ == "__main__":
 
     # tests, including edge cases (incomplete? add more!)
-    email_list = ["charding@iastate.edu", 
-        "chris.edu",
-        "chris@edu",
-        "@bla.edu",
-        "throatwobblermangrove@mpfc.org", 
-        "chris@X.com",
-        "chris.harding@iastate.edu",
-        "chris@pymart.biz",
-        "chris@letsgo!.org",
-        "chris@megasavings.org",
-        "tc@tank.com",
-        ]
-    # validate each email from the list
-    for e in email_list:
-        r, s = is_valid_email_address(e) 
-        if r == None:
-            print(e, s) # OK
-        else:
-            print(f"{e} - error: {s}, error code: {r}") # Error
+email_list = ["charding@iastate.edu", 
+    "chris.edu",
+    "chris@edu",
+    "@bla.edu",
+    "throatwobblermangrove@mpfc.org", 
+    "chris@X.com",
+    "chris.harding@iastate.edu",
+    "chris@pymart.biz",
+    "chris@letsgo!.org",
+    "chris@megasavings.org",
+    "tc@tank.com",
+    ]
+# validate each email from the list
+for e in email_list:
+    r, s = is_valid_email_address(e) 
+    if r == None:
+        print(e, s) # OK
+    else:
+        print(f"{e} - error: {s}, error code: {r}") # Error
 
         
