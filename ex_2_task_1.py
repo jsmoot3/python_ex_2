@@ -37,23 +37,35 @@
 #***********************************************************************************************************
 #************************************* Start of problem 1 **************************************************************
 import re
-def is_valid_email_address(instr):
+def is_valid_email_address(instr):    
+
+# must have 3 parts: <A>@<B>.<C>
+
+
+    if instr.count(".") != 1 or instr.count("@") != 1:
+        return 0,"email not in correct format"
+    L, R = instr.split(".")   
     
-#check if domain is either com edu org gov
+# C must be one of these:  com edu org gov 
+    if R not in ["com","edu","org","gov"]:
+        return 1,"Domain name not correct or allowed"
 
-#check if have 3 parts <A>@<B>.<C>
-#check  A must have between 3 and 16 alpha numeric chars
-    a = re.match(r"(\w+)@(\w+).(\w+)",instr)
-    x = re.search("*.(com||edu||org||gov)$", instr)
+    b, a = L.split("@")      
 
-   res = re.findall(r'[\w\.-]+@[\w\.-]+(?:\.[\w]+)+', instr)
-   if len(res) != 0:
-       err = "seems legit"
-   else:
-       res = 
-        err = "Not valid email"
+        #check  A must have between 3 and 16 alpha numeric chars
+    if len(b) < 3 or len(b) > 16:
+        return 2,"There are to many charters before the @"
+    elif b.isalnum() == False:
+        return 3, "only contain alfanum chars before the @"
 
-   return (err, res)
+    # B must have between 2 and 8 alpha numeric chars (test: isalnum()) 
+    if len(a) < 2 or len(a) > 8:
+        return 4,"There are to many letters after the @ and before the ."
+    elif a.isalnum() == False:
+            return 5, "only contain alfanum chars before the ." 
+
+
+    return None, "Looks good"
 
     
 
@@ -82,6 +94,6 @@ for e in email_list:
     if r == None:
         print(e, s) # OK
     else:
-        print(f"{e} - error: {s}, error code: {r}") # Error
+        print(f"{e} - error: {s}:, error code: {r}") # Error
 
         
